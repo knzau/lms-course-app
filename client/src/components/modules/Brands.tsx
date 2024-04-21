@@ -43,7 +43,7 @@ const Brands = () => {
 	};
 
 	return (
-		<MaxWidthWrapper ref={ref} className="py-[60px] flex flex-col gap-8 text-center">
+		<div ref={ref} className="py-[60px] flex flex-col gap-8 text-center">
 			<p className="font-medium">Brands that Trust Us</p>
 			<motion.div
 				ref={tickerRef}
@@ -58,7 +58,7 @@ const Brands = () => {
 					</a>
 				))}
 			</motion.div>
-		</MaxWidthWrapper>
+		</div>
 	);
 };
 
