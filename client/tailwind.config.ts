@@ -9,8 +9,22 @@ const config = {
 			center: true,
 			padding: "2rem",
 			screens: {
-				"2xl": "1400px"
+				"2xl": "1440px"
 			}
+		},
+		screens: {
+			sm: "576px",
+			// => @media (min-width: 576px) { ... }
+
+			md: "768px",
+			// => @media (min-width: 768px) { ... }
+
+			lg: "992px",
+			// => @media (min-width: 992px) { ... }
+
+			xl: "1200px",
+			// => @media (min-width: 1200px) { ... }
+			xxl: "1400px"
 		},
 		extend: {
 			colors: {
@@ -18,6 +32,7 @@ const config = {
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
 				background: "hsl(var(--background))",
+				backgroundAccent: "#FFF9F0",
 				foreground: "hsl(var(--foreground))",
 				primary: {
 					DEFAULT: "hsl(var(--primary))",
@@ -69,7 +84,7 @@ const config = {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")]
+	plugins: [require("tailwindcss-animate"), require("@tailwindcss/line-clamp")]
 } satisfies Config;
 
 export default config;

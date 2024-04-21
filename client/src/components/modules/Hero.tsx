@@ -3,7 +3,7 @@ import { heroSection } from "@/utils/constants";
 import Image from "next/image";
 import MaxWidthWrapper from "@/components/common/MaxWidthWrapper";
 import Link from "next/link";
-import { buttonVariants } from "../ui/button";
+import { buttonVariants } from "../ui/Button";
 
 const Hero = () => {
 	return (

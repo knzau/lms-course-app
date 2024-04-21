@@ -4,7 +4,7 @@ import Image from "next/image";
 import MaxWidthWrapper from "@/components/common/MaxWidthWrapper";
 import { navMenuItems } from "@/utils/constants";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "../ui/Button";
 
 const NavBar = () => {
 	return (
