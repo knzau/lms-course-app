@@ -4,7 +4,6 @@ import * as React from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
 import { useDotButton, CarouselDotButtons } from "./CarouselDots";
 import { Carousel } from "./index";
-import { CaretLeftIcon, CaretRightIcon } from "@radix-ui/react-icons";
 
 import { cn } from "@/lib/utils";
 
@@ -113,8 +112,6 @@ const CarouselRoot = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
 			};
 		}, [api, onSelect]);
 
-		console.log({ scrolledTo: selectedIndex, scrollSnaps });
-
 		return (
 			<CarouselContext.Provider
 				value={{
@@ -138,14 +135,14 @@ const CarouselRoot = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
 				>
 					<>
 						{children}
-						<div className="flex justify-center  items-center ">
+						<div className="flex justify-center items-center ">
 							<Carousel.ButtonPrev
 								className="relative rounded-lg translate-y-0"
 								icon={props.leftIcon}
 								variant="default"
 							/>
 							{!!shouldShowDots && (
-								<div className="min-w-[300px] flex justify-center">
+								<div className="flex justify-center">
 									<CarouselDotButtons
 										selectedIndex={selectedIndex}
 										scrollSnaps={scrollSnaps}

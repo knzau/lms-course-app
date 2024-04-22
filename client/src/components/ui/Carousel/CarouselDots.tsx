@@ -66,13 +66,13 @@ export const DotButton: React.FC<PropType> = (props) => {
 
 export const CarouselDotButtons = ({ scrollSnaps, selectedIndex, onDotButtonClick }: UseDotButtonType) => {
 	return (
-		<div className="flex flex-wrap justify-center gap-x-6 items-center mr-[calc((2.6rem - 1.4rem) / 2 * -1)]">
+		<div className="flex flex-wrap justify-center gap-x-4 items-center">
 			{scrollSnaps.map((_, index) => (
 				<DotButton
 					key={index}
 					onClick={() => onDotButtonClick(index)}
 					className={cn(
-						"bg-transparent no-underline cursor-pointer border-[2px] p-0 m-0 w-[14px] h-[14px] flex items-center justify-between rounded-[50%]",
+						"bg-transparent no-underline cursor-pointer border-[2px] border-gray-400 p-0 m-0 w-[14px] h-[14px] flex items-center justify-between rounded-[50%]",
 						{
 							"bg-primary": index === selectedIndex
 						}
