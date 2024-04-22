@@ -5,6 +5,8 @@ import MaxWidthWrapper from "@/components/common/MaxWidthWrapper";
 import Benefits from "@/components/modules/Benefits";
 import Features from "@/components/modules/Features";
 import Testimonials from "@/components/modules/Testimonials";
+import Pricing from "@/components/modules/Pricing";
+import Faqs from "@/components/modules/Faqs";
 
 export default function Home() {
 	return (
@@ -17,6 +19,8 @@ export default function Home() {
 			<Benefits />
 			<Features />
 			<Testimonials />
+			<Pricing />
+			<Faqs />
 		</div>
 	);
 }

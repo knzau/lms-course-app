@@ -215,3 +215,69 @@ export const testimonialsSection = {
 export const myLoader = ({ src, width, quality }: ImageLoaderProps) => {
 	return `${src}?w=${width}&q=${quality || 75}`;
 };
+
+export const pricingPlanSection = {
+	title: "Unlock Your Career Potential",
+	description: "Cutting-Edge Courses to Gain In-Demand Skills and Accelerate Your Professional Growth.",
+	plans: [
+		{
+			title: "Free",
+			description: "Get your course started fast, free forever.",
+			pricing: "$0",
+			bills: "for unlimited members",
+			ctaButton: "Get Started Free",
+			featuresTitle: "Free features:",
+			features: [
+				"Access to selected free courses.",
+				"Limited course materials and resources.",
+				"Basic Community support",
+				"No Certificate on completion",
+				"Ad-supported platform."
+			]
+		},
+		{
+			title: "Professional+",
+			description: "For serious learners looking to advance their careers.",
+			pricing: "$79",
+			bills: "per month",
+			ctaButton: "Buy Professional+",
+			featuresTitle: "All Professional+ features:",
+			features: [
+				"Unlimited access to all courses.",
+				"Unlimited course materials and resources.",
+				"Priority support from instructors.",
+				"Certificate on completion",
+				"Ad-free platform.",
+				"Access to exclusive Professional+ community forums.",
+				"Early access to new courses and updates."
+			]
+		}
+	]
+};
+
+export const faqsSection = {
+	title: "Frequently Asked Questions",
+	faqs: [
+		{
+			question: "Can I enroll in multiple courses at once?",
+			answer: "Absolutely! You can enroll in multiple courses simultaneously and access them at your convenience."
+		},
+		{
+			question: "What kind of support can I expect from instructors?",
+			answer: "Our instructors are always available to help."
+		},
+		{
+			question: "Are the courses self-paced or do they have specific start and end dates?",
+			answer: "All our courses are self-paced and can be started anytime."
+		},
+		{
+			question: "Are there any prerequisites for the courses?",
+			answer: "There are no prerequisites for most of our courses. However, some advanced courses may require fundamental knowledge of the topic. Course descriptions specify any prerequisites if applicable."
+		},
+		{
+			question: "Can I download the course materials for offline access?",
+			answer: "Yes, you can download course materials like videos, docs and other files for offline access through our mobile apps."
+		}
+	],
+	moreQuestions: `<span>Still you have any questions? Contact our Team via <a href="https://www.support@skillbridge.com">support@skillbridge.com</a></span>`
+};
