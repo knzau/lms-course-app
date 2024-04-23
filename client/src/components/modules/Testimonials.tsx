@@ -22,7 +22,7 @@ const Testimonials = () => {
 					<Carousel.Content className="mb-16 flex justify-between min-h-[290px]">
 						{testimonialsSection.testimonials.map((testimony, index) => (
 							<Carousel.Item key={index} className=" pl-12 md:basis-1/2 basis-1 flex justify-center">
-								<Card className="p-4 border-radius rounded-[20px] drop-shadow-md border-[#FFBF66]">
+								<Card className="p-4 border-radius rounded-[20px] drop-shadow-md border-accent">
 									<CardContent className="flex md:flex-row gap-4 justify-center items-center flex-col h-full">
 										<div className="basis-[40%]">
 											<h4 className="font-bold text-sm">{testimony.name}</h4>

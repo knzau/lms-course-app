@@ -1,8 +1,7 @@
 import { faqsSection } from "@/utils/constants";
 import MaxWidthWrapper from "../common/MaxWidthWrapper";
-import parse from "html-react-parser";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/Accordion";
-import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { CaretDownIcon, ChevronDownIcon } from "@radix-ui/react-icons";
 
 const Faqs = () => {
 	return (
@@ -16,22 +15,18 @@ const Faqs = () => {
 							value={`faq-item-${index}`}
 							className="border-[1px] border-[#FFBF66] rounded-[8px] bg-backgroundAccent p-6"
 						>
-							<AccordionTrigger
-								icon={
-									<ChevronDownIcon
-										className="h-6 w-6 shrink-0 transition-transform duration-200 p-4 text-white bg-primary rounded-lg"
-										color="#fff"
-									/>
-								}
-							>
-								{faq.question}
-							</AccordionTrigger>
+							<AccordionTrigger>{faq.question}</AccordionTrigger>
 							<AccordionContent>{faq.answer}</AccordionContent>
 						</AccordionItem>
 					);
 				})}
 			</Accordion>
-			<span>{parse(faqsSection.moreQuestions)}</span>
+			<span>
+				Still you have any questions? Contact our Team via{" "}
+				<a className="text-blue-600" href="https://www.support@skillbridge.com">
+					support@skillbridge.com
+				</a>
+			</span>
 		</MaxWidthWrapper>
 	);
 };

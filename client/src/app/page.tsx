@@ -7,6 +7,7 @@ import Features from "@/components/modules/Features";
 import Testimonials from "@/components/modules/Testimonials";
 import Pricing from "@/components/modules/Pricing";
 import Faqs from "@/components/modules/Faqs";
+import CTAFooter from "@/components/modules/CTAFooter";
 
 export default function Home() {
 	return (
@@ -21,6 +22,7 @@ export default function Home() {
 			<Testimonials />
 			<Pricing />
 			<Faqs />
+			<CTAFooter />
 		</div>
 	);
 }

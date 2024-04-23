@@ -7,7 +7,7 @@ import { buttonVariants } from "../ui/Button";
 
 const Hero = () => {
 	return (
-		<section className={cn("bg-cover bg-no-repeat bg-center h-full bg-[url('/hero-bg.png')]")}>
+		<section className={cn("bg-cover bg-no-repeat bg-center h-full bg-[url('/hero-bg.png')] mt-[112px]")}>
 			<MaxWidthWrapper className="w-full flex flex-col md:flex-row justify-between  items-center h-full">
 				<div className="w-[40%] flex flex-col gap-8">
 					<h1 className="font-bold text-[52px] leading-[58px]">{heroSection.title}</h1>
