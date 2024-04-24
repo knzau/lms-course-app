@@ -18,6 +18,7 @@ type CarouselProps = {
 	orientation?: "horizontal" | "vertical";
 	setApi?: (api: CarouselApi) => void;
 	shouldShowDots?: boolean;
+	shouldShowButtons?: boolean;
 	leftIcon?: React.ReactNode;
 	rightIcon?: React.ReactNode;
 };
@@ -45,7 +46,17 @@ export function useCarousel() {
 
 const CarouselRoot = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & CarouselProps>(
 	(
-		{ orientation = "horizontal", opts, setApi, plugins, className, shouldShowDots = false, children, ...props },
+		{
+			orientation = "horizontal",
+			opts,
+			setApi,
+			plugins,
+			className,
+			shouldShowDots = false,
+			shouldShowButtons = false,
+			children,
+			...props
+		},
 		ref
 	) => {
 		const [carouselRef, api] = useEmblaCarousel(
@@ -135,27 +146,30 @@ const CarouselRoot = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
 				>
 					<>
 						{children}
-						<div className="flex justify-center items-center ">
-							<Carousel.ButtonPrev
-								className="relative rounded-lg translate-y-0"
-								icon={props.leftIcon}
-								variant="default"
-							/>
-							{!!shouldShowDots && (
-								<div className="flex justify-center">
-									<CarouselDotButtons
-										selectedIndex={selectedIndex}
-										scrollSnaps={scrollSnaps}
-										onDotButtonClick={onDotButtonClick}
-									/>
-								</div>
-							)}
-							<Carousel.ButtonNext
-								className="relative rounded-lg translate-y-0"
-								icon={props.rightIcon}
-								variant="default"
-							/>
-						</div>
+						{!!shouldShowButtons && (
+							<div className="flex justify-center items-center ">
+								<Carousel.ButtonPrev
+									className="relative rounded-lg translate-y-0"
+									icon={props.leftIcon}
+									variant="default"
+								/>
+
+								{shouldShowDots && (
+									<div className="flex justify-center">
+										<CarouselDotButtons
+											selectedIndex={selectedIndex}
+											scrollSnaps={scrollSnaps}
+											onDotButtonClick={onDotButtonClick}
+										/>
+									</div>
+								)}
+								<Carousel.ButtonNext
+									className="relative rounded-lg translate-y-0"
+									icon={props.rightIcon}
+									variant="default"
+								/>
+							</div>
+						)}
 					</>
 				</div>
 			</CarouselContext.Provider>

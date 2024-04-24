@@ -14,6 +14,7 @@ const Testimonials = () => {
 					opts={{
 						align: "center"
 					}}
+					shouldShowButtons={true}
 					shouldShowDots={true}
 					className="flex flex-col justify-between  items-center"
 					leftIcon={<CaretLeftIcon style={{ width: "24px", height: "24px" }} />}

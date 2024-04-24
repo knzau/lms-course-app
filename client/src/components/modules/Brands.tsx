@@ -1,63 +1,36 @@
 "use client";
-import MaxWidthWrapper from "../common/MaxWidthWrapper";
-import { brandsLinks } from "@/utils/constants";
+import React from "react";
+import { Carousel } from "@/components/ui/Carousel";
+import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
-import { motion, useAnimation, useInView, Variants } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { brandsLinks } from "@/utils/constants";
 
 const Brands = () => {
-	const controls = useAnimation();
-	const ref = useRef<HTMLDivElement>(null);
-	const tickerRef = useRef<HTMLDivElement>(null);
-	const isInView = useInView(ref, { once: true });
-
-	// useEffect(() => {
-	// 	if (isInView) {
-	// 		console.log({ isInView });
-
-	// 		controls.start("animate");
-	// 	}
-	// }, [isInView, controls]);
-
-	// useEffect(() => {
-	// 	if (tickerRef.current) {
-	// 		const tickerWidth = tickerRef.current.offsetWidth;
-	// 		const totalWidth = brandsLinks.length * tickerWidth;
-	// 		controls.set({ x: -totalWidth });
-	// 	}
-	// }, [controls, brandsLinks]);
-
-	const tickerVariants: Variants = {
-		initial: {
-			x: 0
-		},
-		animate: {
-			x: "100%",
-			transition: {
-				repeat: Infinity,
-				repeatType: "loop",
-				ease: "linear",
-				duration: 15
-			}
-		}
-	};
-
 	return (
-		<div ref={ref} className="py-[60px] flex flex-col gap-8 text-center">
-			<p className="font-medium">Brands that Trust Us</p>
-			<motion.div
-				ref={tickerRef}
-				variants={tickerVariants}
-				initial="initial"
-				animate={controls}
-				className="flex w-full items-center justify-between overflow-hidden whitespace-nowrap"
+		<div className="lg:py-[100px] py-[40px] flex flex-col gap-6">
+			<h4 className="text-lg font-bold text-center text-foreground">Brands that trust us</h4>
+			<Carousel.Root
+				className="w-full overflow-hidden"
+				opts={{
+					loop: true,
+					dragFree: true,
+					containScroll: "trimSnaps",
+					align: "center"
+				}}
+				plugins={[
+					Autoplay({
+						delay: 2000
+					})
+				]}
 			>
-				{brandsLinks.map((brand, index) => (
-					<a key={index} href={brand.url} className="fill-[#98989A] ">
-						{<Image alt="brands that trust us" src={brand.icon} width={90} height={30} />}
-					</a>
-				))}
-			</motion.div>
+				<Carousel.Content className="w-full flex gap-3 ">
+					{brandsLinks.map((brand, index) => (
+						<Carousel.Item key={"brand" + index} className="flex justify-center px-4  lg:basis-1/6">
+							{<Image alt="brands that trust us" src={brand.icon} width={90} height={30} />}
+						</Carousel.Item>
+					))}
+				</Carousel.Content>
+			</Carousel.Root>
 		</div>
 	);
 };

@@ -8,14 +8,14 @@ import Testimonials from "@/components/modules/Testimonials";
 import Pricing from "@/components/modules/Pricing";
 import Faqs from "@/components/modules/Faqs";
 import CTAFooter from "@/components/modules/CTAFooter";
-import Footer from "@/components/modules/Footer";
+import BrandCarousel from "@/components/modules/Brands";
 
 export default function Home() {
 	return (
 		<div className="flex flex-col">
 			<Hero />
 			<MaxWidthWrapper>
-				<Brands />
+				<BrandCarousel />
 				<Courses />
 			</MaxWidthWrapper>
 			<Benefits />
