@@ -281,3 +281,34 @@ export const faqsSection = {
 	],
 	moreQuestions: `<span>Still you have any questions? Contact our Team via <a href="https://www.support@skillbridge.com">support@skillbridge.com</a></span>`
 };
+
+export const footerSections = {
+	logo: [{ icon: "/footer/skillbridge_logo-vertical.svg", label: "", link: "/" }],
+	courses: [
+		{ icon: "", label: "Courses", link: "/courses" },
+		{ icon: "", label: "Software", link: "/software" },
+		{ icon: "", label: "Business", link: "/business" },
+		{ icon: "", label: "Art & Humanites", link: "/art_humanities" }
+	],
+	company: [
+		{ icon: "", label: "Company", link: "/company" },
+		{ icon: "", label: "About us", link: "/about_us" },
+		{ icon: "", label: "Pricing", link: "/pricing" },
+		{ icon: "", label: "Contact", link: "/contact" }
+	],
+	support: [
+		{ icon: "", label: "Support", link: "" },
+		{ icon: "/footer/mail.svg", label: "hello@skillbridge.com", link: "/" },
+		{ icon: "/footer/phone.svg", label: "+91 91813 23 2309", link: "/" },
+		{ icon: "/footer/location_pin.svg", label: "4517 Washington Ave. Manchester Kentucky 39495", link: "/" }
+	],
+	socialIcons: [
+		{ icon: "/footer/fb.svg", label: "", link: "https://www.facebook.com" },
+		{ icon: "/footer/twitter.svg", label: "", link: "https://www.twitter.com" },
+		{
+			icon: "/footer/linkedin.svg",
+			label: "",
+			link: "https://www.linkedin.com"
+		}
+	]
+};

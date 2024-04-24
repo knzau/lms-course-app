@@ -36,7 +36,7 @@ const Courses = () => {
 								<span className="text-primary font-bold">{course.students}</span>
 							</div>
 							<div className="flex items-center mt-4 justify-between">
-								<span className="flex  gap-2 text-sm">
+								<span className="flex gap-2 text-sm">
 									<Image alt="brands that trust us" src="/icons/Union.svg" width={16} height={16} />
 									{course.level}
 								</span>
