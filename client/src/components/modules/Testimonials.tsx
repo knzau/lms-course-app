@@ -7,7 +7,7 @@ import { CaretLeftIcon, CaretRightIcon } from "@radix-ui/react-icons";
 
 const Testimonials = () => {
 	return (
-		<div className="bg-backgroundAccent lg:py-[120px] py-[40px]">
+		<div className="bg-backgroundAccent lg:py-[120px] py-[40px] z-10">
 			<MaxWidthWrapper className="flex flex-col gap-10 items-center">
 				<h2 className="text-center mb-4 font-bold text-4xl text-primary">{testimonialsSection.title}</h2>
 				<Carousel.Root

@@ -312,3 +312,73 @@ export const footerSections = {
 		}
 	]
 };
+
+export const courseCategories = [
+	{
+		value: "software",
+		label: "Software"
+	},
+	{
+		value: "business",
+		label: "Business"
+	},
+	{
+		value: "art_humanities",
+		label: "Art & Humanitiess"
+	}
+];
+
+export interface CourseFilter {
+	id: string;
+	label: string;
+}
+export const coursesFilterOptions = {
+	category: [
+		{ id: "software", label: "Software" },
+		{ id: "business", label: "Business" },
+		{ id: "art_humanities", label: "Art & Humanities" },
+		{ id: "healthcare", label: "Healthcare" },
+		{ id: "data", label: "Data" },
+		{ id: "marketing", label: "Marketing" }
+	],
+
+	level: [
+		{ id: "beginner", label: "Beginner" },
+		{ id: "intermediate", label: "Intermediate" },
+		{ id: "advanced", label: "Advanced" }
+	],
+
+	rating: [
+		{ id: "5stars", label: "5 stars" },
+		{ id: "4stars", label: "4 stars" },
+		{ id: "3stars", label: "3 stars" }
+	],
+
+	duration: [
+		{ id: "1-3months", label: "1 - 3 months" },
+		{ id: "3-6months", label: "3 - 6 months" },
+		{ id: "5-8months", label: "5 - 8 months" },
+		{ id: "9months+", label: "9 months+" }
+	],
+
+	skills: [
+		{ id: "web_development", label: "Web Development" },
+		{ id: "programming", label: "Programming" },
+		{ id: "design", label: "Design" },
+		{ id: "business", label: "Business" },
+		{ id: "marketing", label: "Marketing" },
+		{ id: "performance_optimization", label: "Performance Optimization" },
+		{ id: "debugging", label: "Debugging" },
+		{ id: "accessibility", label: "Accessibility" },
+		{ id: "responsive_design", label: "Responsive Design" },
+		{ id: "async_javascript", label: "Asynchronous JavaScript" },
+		{ id: "user_experience_design", label: "User Experience Design" },
+		{ id: "frameworks", label: "Frameworks" },
+		{ id: "databases", label: "Databases" },
+		{ id: "api", label: "API" },
+		{ id: "layout_design", label: "Layout Design" },
+		{ id: "advertising", label: "Advertising" },
+		{ id: "audience_targeting", label: "Audience Targeting" },
+		{ id: "content_strategy", label: "Content Strategy" }
+	]
+};

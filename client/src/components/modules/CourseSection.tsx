@@ -5,7 +5,7 @@ import Image from "next/image";
 import { StarFilledIcon } from "@radix-ui/react-icons";
 import { Button } from "../ui/Button";
 
-const Courses = () => {
+const CourseSection = () => {
 	return (
 		<div className="flex flex-col gap-10 lg:my-[120px] md:my-[80px]">
 			<div>
@@ -56,4 +56,4 @@ const Courses = () => {
 	);
 };
 
-export default Courses;
+export default CourseSection;

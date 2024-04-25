@@ -1,6 +1,4 @@
-import Brands from "@/components/modules/Brands";
 import Hero from "../components/modules/Hero";
-import Courses from "@/components/modules/Courses";
 import MaxWidthWrapper from "@/components/common/MaxWidthWrapper";
 import Benefits from "@/components/modules/Benefits";
 import Features from "@/components/modules/Features";
@@ -9,6 +7,7 @@ import Pricing from "@/components/modules/Pricing";
 import Faqs from "@/components/modules/Faqs";
 import CTAFooter from "@/components/modules/CTAFooter";
 import BrandCarousel from "@/components/modules/Brands";
+import CourseSection from "@/components/modules/CourseSection";
 
 export default function Home() {
 	return (
@@ -16,7 +15,7 @@ export default function Home() {
 			<Hero />
 			<MaxWidthWrapper>
 				<BrandCarousel />
-				<Courses />
+				<CourseSection />
 			</MaxWidthWrapper>
 			<Benefits />
 			<Features />
