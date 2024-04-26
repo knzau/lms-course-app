@@ -111,13 +111,13 @@ const Courses = () => {
 									/>
 								);
 							})}
-							<Button className="mx-auto w-[288px] flex" onClick={fetchMoreCourses}>
-								See More SkillBridge Courses{" "}
-								<span className="ml-2">
-									<ArrowDownIcon />
-								</span>
-							</Button>
 						</div>
+						<Button className="mx-auto w-[288px] flex" onClick={fetchMoreCourses}>
+							See More SkillBridge Courses{" "}
+							<span className="ml-2">
+								<ArrowDownIcon />
+							</span>
+						</Button>
 					</div>
 				</div>
 			</div>

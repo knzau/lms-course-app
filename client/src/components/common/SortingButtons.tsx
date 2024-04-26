@@ -43,7 +43,13 @@ const SortingButtons = ({ sortOptions, onSort, sortSelected, handleViewChange, s
 						<DashboardIcon className="text-input" />
 					</Button>
 				</div>
-				<Combobox options={sortOptions} onChange={onSort} placeholder="Sort by" value={sortSelected} />
+				<Combobox
+					options={sortOptions}
+					onChange={onSort}
+					placeholder="Sort by"
+					value={sortSelected}
+					defaultValue={sortOptions[0].label}
+				/>
 			</div>
 		</div>
 	);

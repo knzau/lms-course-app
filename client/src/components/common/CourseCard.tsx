@@ -54,7 +54,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, classProps, view = "gri
 						{course.rating}
 						<StarFilledIcon className="text-primary" />
 					</span>
-					<span className="text-primary font-bold">{course.students}</span>
+					<span className="text-primary font-bold">{course.students} Students</span>
 				</div>
 				<div className="flex items-center mt-2 gap-4">
 					<span className="flex gap-2 text-sm">

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "./Button";
+import { CheckIcon } from "@radix-ui/react-icons";
 
 interface ComboboxOption {
 	label: string;
@@ -12,11 +13,13 @@ interface ComboboxProps {
 	value?: string;
 	onChange?: (value: string) => void;
 	placeholder?: string;
+	defaultValue?: string;
 }
 
-const Combobox: React.FC<ComboboxProps> = ({ options, value, onChange, placeholder }) => {
+const Combobox: React.FC<ComboboxProps> = ({ options, value, onChange, placeholder, defaultValue }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedValue, setSelectedValue] = useState(value || "");
+	const [selectedLabel, setSelectedLabel] = useState(defaultValue || "");
 	const comboboxRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -34,6 +37,7 @@ const Combobox: React.FC<ComboboxProps> = ({ options, value, onChange, placehold
 
 	const handleOptionClick = (option: ComboboxOption) => {
 		setSelectedValue(option.value);
+		setSelectedLabel(option.label);
 		if (onChange) {
 			onChange(option.value);
 		}
@@ -45,12 +49,12 @@ const Combobox: React.FC<ComboboxProps> = ({ options, value, onChange, placehold
 			<Button
 				variant="outline"
 				className={cn(
-					"inline-flex w-[205px] items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
-					isOpen ? "ring-2 ring-indigo-500" : ""
+					"inline-flex w-[205px] items-center rounded-md border border-gray-300 bg-backgroundAccent px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-backgroundAccent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2",
+					isOpen ? "ring-2 ring-accent" : ""
 				)}
 				onClick={() => setIsOpen(!isOpen)}
 			>
-				{"Sort By: " + selectedValue || placeholder}
+				{"Sort By:  " + selectedLabel || placeholder}
 				<svg
 					className="-mr-1 ml-2 h-5 w-5"
 					xmlns="http://www.w3.org/2000/svg"
@@ -75,11 +79,14 @@ const Combobox: React.FC<ComboboxProps> = ({ options, value, onChange, placehold
 								type="button"
 								className={cn(
 									"flex w-full items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100",
-									selectedValue === option.value ? "bg-gray-200" : ""
+									selectedValue === option.value ? "bg-backgroundAccent " : ""
 								)}
 								onClick={() => handleOptionClick(option)}
 							>
 								{option.label}
+								{selectedValue === option.value && (
+									<CheckIcon className="ml-auto h-5 w-5 text-gray-700" />
+								)}
 							</button>
 						))}
 					</div>
