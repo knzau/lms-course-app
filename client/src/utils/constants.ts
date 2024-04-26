@@ -1,5 +1,8 @@
 import { ImageLoader, ImageLoaderProps } from "next/image";
 
+export const GRID = "grid";
+export const LIST = "list";
+
 export const heroSection = {
 	title: "Your Career is Stuck in Neutral?",
 	subtitle: "Our experts accelerate your tech knowledge with up-dated and demanded skills.",
@@ -48,6 +51,19 @@ export const brandsLinks = [
 	}
 ];
 
+export interface Course {
+	id: string;
+	title: string;
+	description: string;
+	thumbnail: string;
+	createdBy: string;
+	duration: string;
+	level: string;
+	skills: string[];
+	students: string;
+	rating: string;
+}
+
 export const coursesSection = {
 	title: "Learn by Practice",
 	description: "Explore our top courses to boost your skills and career",
@@ -60,6 +76,18 @@ export const coursesSection = {
 			thumbnail:
 				"https://res.cloudinary.com/dvdzi0ei2/image/upload/v1713320865/lms-app/home/courses/Image-5_dd6kae.png",
 			createdBy: "Created by John Smith",
+			skills: [
+				"HTML",
+				"CSS",
+				"JavaScript",
+				"React",
+				"Responsive Design",
+				"Web Accessibility",
+				"Git",
+				"npm",
+				"Debugging",
+				"Deployment"
+			],
 			duration: "1-3 months",
 			level: "Beginner",
 			students: "3500+",
@@ -72,9 +100,21 @@ export const coursesSection = {
 				"Develop front-end web skills with HTML, CSS and JavaScript to build responsive websites and web apps",
 			thumbnail:
 				"https://res.cloudinary.com/dvdzi0ei2/image/upload/v1713320861/lms-app/home/courses/Image-1_sqntts.png",
-			createBy: "Created by John Smith",
+			createdBy: "Created by John Smith",
 			duration: "1-3 months",
 			level: "Beginner",
+			skills: [
+				"HTML5",
+				"CSS3",
+				"JavaScript",
+				"React",
+				"Vue.js",
+				"Redux",
+				"Webpack",
+				"Babel",
+				"Responsive Design",
+				"Performance Optimization"
+			],
 			students: "3000+",
 			rating: "4.7/5"
 		},
@@ -87,6 +127,18 @@ export const coursesSection = {
 			createdBy: "Created by Jane Doe",
 			duration: "2-4 months",
 			level: "Intermediate",
+			skills: [
+				"Search Engine Optimization (SEO)",
+				"Social Media Marketing",
+				"Email Marketing",
+				"Content Marketing",
+				"Google Analytics",
+				"Pay-Per-Click (PPC) Advertising",
+				"Influencer Marketing",
+				"Conversion Rate Optimization",
+				"Marketing Automation",
+				"Copywriting"
+			],
 			students: "2800+",
 			rating: "4.6/5"
 		},
@@ -99,6 +151,18 @@ export const coursesSection = {
 			createdBy: "Created by Sarah Lee",
 			duration: "4-6 months",
 			level: "Intermediate",
+			skills: [
+				"Python",
+				"NumPy",
+				"Pandas",
+				"Matplotlib",
+				"Seaborn",
+				"Scikit-learn",
+				"Machine Learning",
+				"Supervised Learning",
+				"Unsupervised Learning",
+				"Data Visualization"
+			],
 			students: "3900+",
 			rating: "4.8/5"
 		},
@@ -111,6 +175,18 @@ export const coursesSection = {
 			createdBy: "Created by David Chen",
 			duration: "2-3 months",
 			level: "Advanced",
+			skills: [
+				"ES6+ Syntax",
+				"Asynchronous Programming",
+				"Closures",
+				"Prototypes",
+				"Object-Oriented Programming",
+				"Functional Programming",
+				"Design Patterns",
+				"Performance Optimization",
+				"Testing",
+				"Debugging"
+			],
 			students: "2100+",
 			rating: "4.9/5"
 		},
@@ -123,6 +199,18 @@ export const coursesSection = {
 			createdBy: "Created by Emily Williams",
 			duration: "1-2 months",
 			level: "Beginner",
+			skills: [
+				"Color Theory",
+				"Typography",
+				"Layout Design",
+				"Branding",
+				"Adobe Photoshop",
+				"Adobe Illustrator",
+				"Adobe InDesign",
+				"Vector Graphics",
+				"Raster Graphics",
+				"Print Design"
+			],
 			students: "1800+",
 			rating: "4.5/5"
 		},
@@ -135,6 +223,18 @@ export const coursesSection = {
 			createdBy: "Created by Alex Nguyen",
 			duration: "3-6 months",
 			level: "Intermediate",
+			skills: [
+				"React Native",
+				"Flutter",
+				"Swift",
+				"Kotlin",
+				"Xcode",
+				"Android Studio",
+				"UI/UX Design",
+				"APIs",
+				"Database Integration",
+				"Testing and Deployment"
+			],
 			students: "3700+",
 			rating: "4.7/5"
 		},
@@ -147,6 +247,18 @@ export const coursesSection = {
 			createdBy: "Created by Jessica Gonzalez",
 			duration: "2-4 months",
 			level: "Intermediate",
+			skills: [
+				"User Research",
+				"Wireframing",
+				"Prototyping",
+				"Usability Testing",
+				"Interaction Design",
+				"Visual Design",
+				"Information Architecture",
+				"Accessibility",
+				"Design Thinking",
+				"Design Systems"
+			],
 			students: "2500+",
 			rating: "4.8/5"
 		}

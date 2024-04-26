@@ -58,7 +58,7 @@ const NavBar = () => {
 				</MaxWidthWrapper>
 			</div>
 			{isCoursesPath && (
-				<div className="lg:py-4">
+				<div className="lg:py-4 bg-white">
 					<MaxWidthWrapper className="">
 						<NavigationItems />
 					</MaxWidthWrapper>
