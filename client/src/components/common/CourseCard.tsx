@@ -7,11 +7,13 @@ interface CourseCardProps {
 	course: Course;
 	view?: string;
 	classProps?: string;
+	navigateToCourse: (courseId: string) => void;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ course, classProps, view = "grid" }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ course, classProps, view = "grid", navigateToCourse }) => {
 	const isList = view === LIST;
 	const isGrid = view === GRID;
+
 	return (
 		<div
 			key={course.id}
@@ -23,6 +25,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, classProps, view = "gri
 				},
 				classProps
 			)}
+			onClick={() => navigateToCourse(course.id)}
 		>
 			<Image
 				loader={myLoader}
@@ -45,7 +48,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, classProps, view = "gri
 							{course.skills?.join(", ")}
 						</p>
 					) : (
-						<p className="text-sm line-clamp-2">{course.description}</p>
+						<p className="text-sm line-clamp-2">{course.summary}</p>
 					)}
 				</div>
 

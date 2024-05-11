@@ -1,6 +1,7 @@
 "use client";
+import { useRouter } from "next/navigation";
 import MaxWidthWrapper from "@/components/common/MaxWidthWrapper";
-import { coursesFilterOptions, GRID, LIST } from "@/utils/constants";
+import { COURSES_PATH, coursesFilterOptions, GRID, LIST } from "@/utils/constants";
 import React from "react";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { coursesSection } from "@/utils/constants";
@@ -11,6 +12,7 @@ import SortingButtons from "../../components/common/SortingButtons";
 import { cn } from "@/lib/utils";
 
 const Courses = () => {
+	const router = useRouter();
 	const sortOptions = [
 		{ label: "Best Match", value: "best-match" },
 		{ label: "Newest", value: "newest" }
@@ -33,6 +35,9 @@ const Courses = () => {
 		console.log("Fetching more courses");
 	};
 
+	const navigateToPage = (pageId: string) => {
+		router.push(`${COURSES_PATH}/${pageId}`);
+	};
 	return (
 		<MaxWidthWrapper className="flex flex-col  mt-[112px] lg:py-[100px] py-[40px]">
 			<div className="flex gap-4 justify-between w-full min-h-[100%]">
@@ -108,6 +113,7 @@ const Courses = () => {
 										classProps=" mb-10 drop-shadow-md bg-white"
 										course={course}
 										view={view}
+										navigateToCourse={() => navigateToPage(course.id)}
 									/>
 								);
 							})}

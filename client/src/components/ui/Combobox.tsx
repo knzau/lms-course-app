@@ -14,12 +14,20 @@ interface ComboboxProps {
 	onChange?: (value: string) => void;
 	placeholder?: string;
 	defaultValue?: string;
+	parentClassProps?: string;
 }
 
-const Combobox: React.FC<ComboboxProps> = ({ options, value, onChange, placeholder, defaultValue }) => {
+const Combobox: React.FC<ComboboxProps> = ({
+	options,
+	value,
+	onChange,
+	placeholder,
+	defaultValue,
+	parentClassProps
+}) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedValue, setSelectedValue] = useState(value || "");
-	const [selectedLabel, setSelectedLabel] = useState(defaultValue || "");
+	const [selectedLabel, setSelectedLabel] = useState("");
 	const comboboxRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -44,17 +52,20 @@ const Combobox: React.FC<ComboboxProps> = ({ options, value, onChange, placehold
 		setIsOpen(false);
 	};
 
+	console.log({ selectedValue, selectedLabel });
+
 	return (
 		<div className="relative" ref={comboboxRef}>
 			<Button
 				variant="outline"
 				className={cn(
-					"inline-flex w-[205px] items-center rounded-md border border-gray-300 bg-backgroundAccent px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-backgroundAccent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2",
-					isOpen ? "ring-2 ring-accent" : ""
+					"flex w-[205px] items-center justify-between rounded-md border border-gray-300 bg-backgroundAccent px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-backgroundAccent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2",
+					isOpen ? "ring-2 ring-accent" : "",
+					parentClassProps
 				)}
 				onClick={() => setIsOpen(!isOpen)}
 			>
-				{"Sort By:  " + selectedLabel || placeholder}
+				{(placeholder || "") + "  " + selectedLabel}
 				<svg
 					className="-mr-1 ml-2 h-5 w-5"
 					xmlns="http://www.w3.org/2000/svg"

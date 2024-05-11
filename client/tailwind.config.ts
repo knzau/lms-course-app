@@ -31,6 +31,7 @@ const config = {
 				border: "var(--border)",
 				input: "var(--input)",
 				ring: "var(--ring)",
+				textPrimary: "var(--text-primary)",
 				background: "var(--background)",
 				backgroundAccent: "#FFF9F0",
 				foreground: "var(--foreground)",

@@ -46,9 +46,10 @@ const SortingButtons = ({ sortOptions, onSort, sortSelected, handleViewChange, s
 				<Combobox
 					options={sortOptions}
 					onChange={onSort}
-					placeholder="Sort by"
+					placeholder="Sort By:"
 					value={sortSelected}
 					defaultValue={sortOptions[0].label}
+					parentClassProps="w-[200px]"
 				/>
 			</div>
 		</div>
