@@ -10,7 +10,7 @@ interface CourseCardProps {
 	navigateToCourse: (courseId: string) => void;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ course, classProps, view = "grid", navigateToCourse }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ course, classProps, view = GRID, navigateToCourse }) => {
 	const isList = view === LIST;
 	const isGrid = view === GRID;
 
