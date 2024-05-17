@@ -102,7 +102,6 @@ interface ILoginRequest {
 export const loginUser = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const { email, password } = req.body as ILoginRequest;
-		console.log({ email, password });
 
 		if (!email || !password) {
 			return next(new ErrorHandler("Please enter email and password", 400));
@@ -159,6 +158,8 @@ export const updateAccessToken = catchAsyncError(async (req: Request, res: Respo
 			expiresIn: "3d"
 		});
 
+		req.user = user;
+
 		res.cookie("access_token", accessToken, accessTokenOptions);
 		res.cookie("refresh_token", refreshToken, refreshTokenOptions);
 		res.status(200).json({
@@ -176,5 +177,55 @@ export const getUserInfo = catchAsyncError(async (req: Request, res: Response, n
 		getUserById(userId, res);
 	} catch (error: any) {
 		return next(new ErrorHandler(error.message, 500));
+	}
+});
+
+interface ISocialAuthBody {
+	email: string;
+	name: string;
+	avatar: string;
+}
+
+export const socialAuth = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const { email, name, avatar } = req.body as ISocialAuthBody;
+
+		const user = await userModel.findOne({ email });
+		if (!user) {
+			const newUser = await userModel.create({ email, name, avatar });
+			sendToken(newUser, 200, res);
+		} else {
+			sendToken(user, 200, res);
+		}
+	} catch (error) {}
+});
+
+interface IUpdateUserInfo {
+	name?: string;
+	email?: string;
+}
+export const updateUserInfo = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const { name, email } = req.body as IUpdateUserInfo;
+
+		const userId = req.user?._id;
+		const user = await userModel.findById(userId);
+		if (email && user) {
+			const isExistingEmail = await userModel.findOne({ email });
+			if (isExistingEmail) {
+				return next(new ErrorHandler("Email already exist", 400));
+			}
+			user.email = email;
+		}
+		if (name && user) {
+			user.name = name;
+		}
+
+		await user?.save();
+		await redis.set(userId, JSON.stringify(user));
+
+		res.status(201).json({ success: true, user });
+	} catch (error: any) {
+		return next(new ErrorHandler(error.message, 400));
 	}
 });

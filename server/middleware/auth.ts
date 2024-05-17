@@ -6,19 +6,16 @@ import { redis } from "../utils/redis";
 
 export const isAuthenticated = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
 	const accessToken = req.cookies.access_token;
-	console.log({ signedcooks: req.cookies });
 
 	if (!accessToken) {
 		return next(new ErrorHandler("Login is required", 401));
 	}
 
 	const decoded = jwt.verify(accessToken, process.env.ACCESS_TOKEN as string);
-	console.log({ decoded });
 
 	if (!decoded) {
 		return next(new ErrorHandler("Invalid access token", 401));
 	}
-	console.log({ decoded });
 
 	const user = await redis.get(decoded.id);
 	if (!user) {
