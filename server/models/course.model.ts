@@ -9,15 +9,23 @@ interface ILink extends Document {
 interface IComment extends Document {
 	user: object;
 	comment: string;
+	commentReplies?: IComment[];
 }
 
+interface IReview extends Document {
+	user: object;
+	rating: number;
+	comment: string;
+	commentReplies: IComment[];
+}
 interface ICourseDetails extends Document {
 	title: string;
 	description: string;
 	videoUrl: string;
 	videoThumbnaul: object;
-	videSection: string;
+	videoSection: string;
 	videoLength: string;
+	videoPlayer: string;
 	links: ILink[];
 	suggestion: string;
 	questions: IComment[];
@@ -40,15 +48,22 @@ interface ICourse extends Document {
 	title: string;
 	course_id: string;
 	summary: string;
+	price: number;
+	estimatedPrice?: number;
+	tags?: string;
 	description: string;
 	thumbnail: string;
 	createdBy: string;
 	duration: string;
 	demoUrl: string;
 	level: string;
+	benefits: string;
 	skills: string[];
+	prerequisites: { title: string }[];
 	students: string;
-	rating: string;
+	rating: number;
+	purchased: number;
+	reviews: IReview[];
 	curriculum: ICurriculum;
 	courseData: ICourseDetails;
 }
@@ -74,13 +89,22 @@ const curriculumSchema = new mongoose.Schema<ICurriculum>({
 	description: String,
 	chapters: [curriculumChapterSchema]
 });
+const reviewSchema = new mongoose.Schema<IReview>({
+	user: Object,
+	rating: {
+		type: Number,
+		default: 0
+	},
+	comment: String
+});
 
 const courseDetailsSchema = new mongoose.Schema<ICourseDetails>({
 	title: String,
 	description: String,
 	videoUrl: String,
-	videSection: String,
+	videoSection: String,
 	videoLength: String,
+	videoPlayer: String,
 	links: [linkSchema],
 	suggestion: String,
 	questions: [commentSchema]
@@ -106,11 +130,20 @@ const courseSchema = new mongoose.Schema<ICourse>({
 	},
 	thumbnail: {
 		public_id: {
+			required: true,
 			type: String
 		},
 		url: {
+			required: true,
 			type: String
 		}
+	},
+	tags: {
+		type: String,
+		required: true
+	},
+	estimatedPrice: {
+		type: Number
 	},
 	createdBy: {
 		type: String,
@@ -120,6 +153,8 @@ const courseSchema = new mongoose.Schema<ICourse>({
 		type: String,
 		required: true
 	},
+	benefits: [{ title: String }],
+	prerequisites: [{ title: String }],
 	demoUrl: {
 		type: String,
 		required: true
@@ -137,9 +172,14 @@ const courseSchema = new mongoose.Schema<ICourse>({
 		required: true
 	},
 	rating: {
-		type: String,
-		required: true
+		type: Number,
+		default: 0
 	},
+	purchased: {
+		type: Number,
+		default: 0
+	},
+	reviews: [reviewSchema],
 	curriculum: [curriculumSchema],
 	courseData: [courseDetailsSchema]
 });
