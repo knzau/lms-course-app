@@ -4,6 +4,14 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { errorMiddleware } from "./middleware/errorMiddleware";
 import userRouter from "./routes/user.routes";
+import { v2 as cloudinary } from "cloudinary";
+import courseRouter from "./routes/course.routes";
+
+cloudinary.config({
+	cloud_name: process.env.CLOUD_NAME,
+	api_key: process.env.CLOUD_API_KEY,
+	api_secret: process.env.CLOUD_SECRET
+});
 
 export const app = express();
 
@@ -12,6 +20,7 @@ app.use(cookieParser());
 app.use(cors({ origin: process.env.ORIGIN }));
 
 app.use("/api/v1", userRouter);
+app.use("/api/v1", courseRouter);
 
 app.get("/test", (req: Request, res: Response, next: NextFunction) => {
 	res.status(200).json({ success: true, message: "Test endpoint" });

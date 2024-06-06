@@ -10,6 +10,7 @@ import sendMail from "../utils/sendMail";
 import { accessTokenOptions, refreshTokenOptions, sendToken } from "../utils/jwt";
 
 import { getUserById } from "../services/user.service";
+import cloudinary from "cloudinary";
 
 // register user
 interface IRegisterUser {
@@ -227,5 +228,71 @@ export const updateUserInfo = catchAsyncError(async (req: Request, res: Response
 		res.status(201).json({ success: true, user });
 	} catch (error: any) {
 		return next(new ErrorHandler(error.message, 400));
+	}
+});
+
+//update user password
+interface IUpdatePassword {
+	oldPassword: string;
+	newPassword: string;
+}
+
+export const updateUserPassword = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const { oldPassword, newPassword } = req.body as IUpdatePassword;
+
+		const user = await userModel.findById(req.user?._id).select("+password");
+
+		if (!user?.password) {
+			return next(new ErrorHandler("Invalid users", 400));
+		}
+		const isPasswordMatch = await user?.comparePassword(oldPassword);
+		if (!isPasswordMatch) {
+			return next(new ErrorHandler("Invalid old password", 400));
+		}
+
+		user.password = newPassword;
+
+		await user.save();
+		await redis.set(req.user?._id, JSON.stringify(user));
+
+		res.status(201).json({
+			success: true,
+			user
+		});
+	} catch (error: any) {
+		next(new ErrorHandler(error.message, 400));
+	}
+});
+
+interface IUpdateProfilePicture {
+	avatar: string;
+}
+
+export const updateProfilePicture = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const { avatar } = req.body;
+		const userId = req.user?._id;
+		const user = await userModel.findById(userId);
+
+		if (avatar && user) {
+			if (user?.avatar?.public_id) {
+				await cloudinary.v2.uploader.destroy(user?.avatar.public_id);
+			}
+			const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+				folder: "avatars",
+				width: 150
+			});
+
+			user.avatar = {
+				public_id: myCloud.public_id,
+				url: myCloud.secure_url
+			};
+		}
+		await user?.save();
+		await redis.set(userId, JSON.stringify(user));
+		res.status(200).json({ success: true, user });
+	} catch (error: any) {
+		next(new ErrorHandler(error.message, 400));
 	}
 });
