@@ -52,11 +52,36 @@ export const brandsLinks = [
 	}
 ];
 
+interface ILink {
+	title: string;
+	url: string;
+}
+
+interface IComment {
+	user: object;
+	comment: string;
+}
+
+interface ICourseContent {}
+interface ICourseDetails {
+	title: string;
+	description: string;
+	videoUrl: string;
+	videoThumbnail: object;
+	videSection: string;
+	videoLength: string;
+
+	links: ILink[];
+	suggestion: string;
+	questions: IComment[];
+}
+
 interface CurriculumChapter {
 	name: string;
 	lessons: number;
 	duration: string;
 	topics: string[];
+	topicVideos: [{ id: string; title: string; videoUrl: string; videoThumbnail: string }];
 }
 
 export interface Curriculum {
@@ -66,24 +91,26 @@ export interface Curriculum {
 }
 
 export interface Course {
-	id: string;
 	title: string;
+	course_id: string;
 	summary: string;
 	description: string;
 	thumbnail: string;
 	createdBy: string;
 	duration: string;
+	demoUrl: string;
 	level: string;
 	skills: string[];
 	students: string;
 	rating: string;
 	curriculum: Curriculum;
+	courseData: ICourseDetails;
 }
 
 export const courseDetails = [
 	{
 		title: "UI/UX Design",
-		id: "ui_ux_design",
+		course_id: "ui_ux_design",
 		createdBy: "Jessica Gonzalez",
 		summary: "Learn HTML, CSS, JavaScript, React & more to become a web developer",
 		thumbnail:
@@ -91,6 +118,7 @@ export const courseDetails = [
 		description:
 			"Master the art of creating intuitive user interfaces (UI) and enhancing user experiences (UX). This course is an enticing opportunity for individuals seeking a fulfilling career without prior experience or a degree. Unleash your creativity, drive innovation, and make a lasting impact in the digital landscape as a UI/UX designer. Learn design principles, wireframing, prototyping, and usability testing techniques.",
 		level: "intermediate",
+		demoUrl: "https://res.cloudinary.com/dwtaiai3t/video/upload/v1716061952/courses/videos/uiux_xfr0rj.mp4",
 		duration: "2-4 months",
 		language: "taught in English",
 		students: "5000",
@@ -116,13 +144,15 @@ export const courseDetails = [
 					name: "Introduction to UI/UX Design",
 					lessons: 2,
 					duration: "3 hours",
-					topics: ["What is UI/UX Design?", "The Importance of User-Centered Design"]
+					topics: ["What is UI/UX Design?", "The Importance of User-Centered Design"],
+					topicVideos: []
 				},
 				{
 					name: "User Research",
 					lessons: 4,
 					duration: "8 hours",
-					topics: ["User Personas", "User Interviews", "Usability Testing", "Competitive Analysis"]
+					topics: ["User Personas", "User Interviews", "Usability Testing", "Competitive Analysis"],
+					topicVideos: []
 				},
 				{
 					name: "Design Principles and Wireframing",
@@ -135,7 +165,8 @@ export const courseDetails = [
 						"Low-Fidelity Wireframes",
 						"High-Fidelity Wireframes",
 						"Responsive Design"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "Visual Design",
@@ -152,13 +183,14 @@ export const courseDetails = [
 						"Interactive Prototypes",
 						"Usability Testing Methods",
 						"Iterating Based on Feedback"
-					]
+					],
+					topicVideos: []
 				}
 			]
 		}
 	},
 	{
-		id: "mobile_app_development",
+		course_id: "mobile_app_development",
 		title: "Mobile App Development",
 		createdBy: "Alex Nguyen",
 		students: "3000",
@@ -172,6 +204,8 @@ export const courseDetails = [
 		level: "intermediate",
 		duration: "3-6 months",
 		language: "taught in English",
+		demoUrl:
+			"https://res.cloudinary.com/dwtaiai3t/video/upload/v1716061806/courses/videos/mobile_app_dev_lpiw88.mp4",
 		skills: [
 			"React Native",
 			"Flutter",
@@ -197,7 +231,8 @@ export const courseDetails = [
 						"Mobile App Development Landscape",
 						"Native vs. Cross-Platform Development",
 						"Setting up the Development Environment"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "React Native Fundamentals",
@@ -210,7 +245,8 @@ export const courseDetails = [
 						"State Management with Redux",
 						"Styling and Animations",
 						"Deploying React Native Apps"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "Flutter Development",
@@ -223,7 +259,8 @@ export const courseDetails = [
 						"State Management with Provider",
 						"Networking and APIs",
 						"Deploying Flutter Apps"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "UI/UX Design for Mobile Apps",
@@ -234,7 +271,8 @@ export const courseDetails = [
 						"Responsive and Adaptive Design",
 						"Accessibility in Mobile Apps",
 						"User Experience Testing"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "App Development Best Practices",
@@ -245,13 +283,14 @@ export const courseDetails = [
 						"Performance Optimization",
 						"Security and Privacy",
 						"Testing and Deployment"
-					]
+					],
+					topicVideos: []
 				}
 			]
 		}
 	},
 	{
-		id: "graphic_design_for_beginners",
+		course_id: "graphic_design_for_beginners",
 		title: "Graphic Design for Beginners",
 		createdBy: "Emily Williams",
 		thumbnail:
@@ -262,6 +301,8 @@ export const courseDetails = [
 			"Learn the fundamentals of graphic design and create visually stunning designs. This course is tailored for beginners who want to unlock their creativity and develop essential design skills. Explore color theory, typography, layout design, and branding principles. Master industry-standard tools like Adobe Photoshop, Illustrator, and InDesign to create captivating graphics for both digital and print media.",
 		students: "2000",
 		rating: "4.5/5",
+		demoUrl:
+			"https://res.cloudinary.com/dwtaiai3t/video/upload/v1716061810/courses/videos/graphics_design_fhntj8.mp4",
 		level: "beginner",
 		duration: "1-2 months",
 		language: "taught in English",
@@ -290,7 +331,8 @@ export const courseDetails = [
 						"Mobile App Development Landscape",
 						"Native vs. Cross-Platform Development",
 						"Setting up the Development Environment"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "React Native Fundamentals",
@@ -303,7 +345,8 @@ export const courseDetails = [
 						"State Management with Redux",
 						"Styling and Animations",
 						"Deploying React Native Apps"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "Flutter Development",
@@ -316,7 +359,8 @@ export const courseDetails = [
 						"State Management with Provider",
 						"Networking and APIs",
 						"Deploying Flutter Apps"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "UI/UX Design for Mobile Apps",
@@ -327,7 +371,8 @@ export const courseDetails = [
 						"Responsive and Adaptive Design",
 						"Accessibility in Mobile Apps",
 						"User Experience Testing"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "App Development Best Practices",
@@ -338,13 +383,14 @@ export const courseDetails = [
 						"Performance Optimization",
 						"Security and Privacy",
 						"Testing and Deployment"
-					]
+					],
+					topicVideos: []
 				}
 			]
 		}
 	},
 	{
-		id: "advanced_javascript",
+		course_id: "advanced_javascript",
 		title: "Advanced JavaScript",
 		createdBy: "David Chen",
 		thumbnail:
@@ -356,6 +402,7 @@ export const courseDetails = [
 		students: "1000",
 		rating: "4.7/5",
 		level: "advanced",
+		demoUrl: "https://res.cloudinary.com/dwtaiai3t/video/upload/v1716061805/courses/videos/advanced_js_hl3yaz.mp4",
 		duration: "2-3 months",
 		language: "taught in English",
 		skills: [
@@ -429,13 +476,14 @@ export const courseDetails = [
 						"Code Linting and Formatting",
 						"Unit Testing with Jest",
 						"End-to-End Testing with Cypress"
-					]
+					],
+					topicVideos: []
 				}
 			]
 		}
 	},
 	{
-		id: "data_science_fundamentals",
+		course_id: "data_science_fundamentals",
 		title: "Data Science Fundamentals",
 		createdBy: "Sarah Lee",
 		summary: "Gain essential skills in data analysis, machine learning, and data visualization.",
@@ -446,6 +494,8 @@ export const courseDetails = [
 		students: "5000",
 		rating: "4.8/5",
 		level: "intermediate",
+		demoUrl:
+			"https://res.cloudinary.com/dwtaiai3t/video/upload/v1716061806/courses/videos/data_science_analysis_zit8wp.mp4",
 		duration: "4-6 months",
 		language: "taught in English",
 		skills: [
@@ -469,13 +519,14 @@ export const courseDetails = [
 					name: "Introduction to Data Science",
 					lessons: 3,
 					duration: "6 hours",
-					topics: ["What is Data Science?", "Data Science Workflows", "Python for Data Science"]
+					topics: ["What is Data Science?", "Data Science Workflows", "Python for Data Science"],
+					topicVideos: []
 				}
 			]
 		}
 	},
 	{
-		id: "front_end_web_development",
+		course_id: "front_end_web_development",
 		title: "Front-End Web Development",
 		createdBy: "Mike Johnson",
 		summary:
@@ -486,6 +537,7 @@ export const courseDetails = [
 			"Master HTML, CSS, JavaScript, and popular front-end frameworks like React and Vue. This comprehensive course will equip you with the skills and knowledge to build modern, responsive, and interactive web applications. Learn the latest front-end development techniques, including React, Redux, Webpack, and Babel. Optimize your web applications for performance and create stunning user interfaces.",
 		students: "5000",
 		rating: "4.8/5",
+		demoUrl: "https://res.cloudinary.com/dwtaiai3t/video/upload/v1716061809/courses/videos/frontend_dev_r2hv4s.mp4",
 		level: "intermediate",
 		duration: "3-6 months",
 		language: "taught in English",
@@ -515,7 +567,8 @@ export const courseDetails = [
 						"CSS Selectors and Styling",
 						"Responsive Web Design",
 						"CSS Frameworks (Bootstrap, Bulma)"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "JavaScript Essentials",
@@ -527,7 +580,8 @@ export const courseDetails = [
 						"Events and Event Handling",
 						"Asynchronous JavaScript (Promises, Async/Await)",
 						"Modern JS Features (ES6+)"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "React Fundamentals",
@@ -540,7 +594,8 @@ export const courseDetails = [
 						"React Hooks",
 						"React Router",
 						"Redux for State Management"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "Front-End Tools and Frameworks",
@@ -552,7 +607,8 @@ export const courseDetails = [
 						"Angular",
 						"Performance Optimization",
 						"Testing and Deployment"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "Front-End Projects",
@@ -562,13 +618,14 @@ export const courseDetails = [
 						"Building a Responsive Website",
 						"Creating a Single Page Application",
 						"Deploying a Front-End Application"
-					]
+					],
+					topicVideos: []
 				}
 			]
 		}
 	},
 	{
-		id: "digital_marketing",
+		course_id: "digital_marketing",
 		title: "Digital Marketing",
 		createdBy: "Jane Doe",
 		summary: "Explore the latest digital marketing strategies and tactics to grow your online presence.",
@@ -579,6 +636,8 @@ export const courseDetails = [
 		students: "3000",
 		rating: "4.6/5",
 		level: "intermediate",
+		demoUrl:
+			"https://res.cloudinary.com/dwtaiai3t/video/upload/v1716061807/courses/videos/digital_marketing_wf1w8y.mp4",
 		duration: "2-4 months",
 		language: "taught in English",
 		skills: [
@@ -606,7 +665,8 @@ export const courseDetails = [
 						"What is Digital Marketing?",
 						"Digital Marketing Landscape",
 						"Setting Marketing Goals and Objectives"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "Search Engine Optimization (SEO)",
@@ -623,7 +683,8 @@ export const courseDetails = [
 						"Content Strategy",
 						"Paid Social Advertising",
 						"Social Media Monitoring and Analytics"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "Email Marketing and Content Marketing",
@@ -634,7 +695,8 @@ export const courseDetails = [
 						"Email Automation and Segmentation",
 						"Content Marketing Strategy",
 						"Creating Engaging Content"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "Paid Advertising and Analytics",
@@ -646,13 +708,14 @@ export const courseDetails = [
 						"Facebook Ads",
 						"Conversion Rate Optimization",
 						"Web Analytics and Reporting"
-					]
+					],
+					topicVideos: []
 				}
 			]
 		}
 	},
 	{
-		id: "web_design_fundamentals",
+		course_id: "web_design_fundamentals",
 		title: "Web Design Fundamentals",
 		createdBy: "John Smith",
 		summary: "Gain essential skills in web design including HTML/CSS, responsive design, and more.",
@@ -662,6 +725,7 @@ export const courseDetails = [
 			"Learn HTML, CSS, JavaScript, React & more to become a web developer. This beginner-friendly course will provide you with a solid foundation in web development. Start by mastering HTML, CSS, and JavaScript – the building blocks of the web. Then, dive into React, a popular JavaScript library for creating dynamic user interfaces. Explore responsive design, web accessibility, version control with Git, and deployment techniques.",
 		students: "2000",
 		rating: "4.7/5",
+		demoUrl: "https://res.cloudinary.com/dwtaiai3t/video/upload/v1716062069/courses/videos/web_design_q5vain.mp4",
 		level: "beginner",
 		duration: "1-3 months",
 		language: "taught in English",
@@ -690,7 +754,8 @@ export const courseDetails = [
 						"Understanding the Web",
 						"Web Development Fundamentals",
 						"Development Tools and Environment Setup"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "HTML and CSS",
@@ -703,7 +768,8 @@ export const courseDetails = [
 						"Responsive Web Design",
 						"CSS Frameworks (Bootstrap, Bulma)",
 						"CSS Preprocessors (Sass, Less)"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "JavaScript Fundamentals",
@@ -715,7 +781,8 @@ export const courseDetails = [
 						"DOM Manipulation",
 						"Events and Event Handling",
 						"Asynchronous JavaScript"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "React.js",
@@ -728,7 +795,8 @@ export const courseDetails = [
 						"React Hooks",
 						"React Router",
 						"Redux for State Management"
-					]
+					],
+					topicVideos: []
 				},
 				{
 					name: "Web Development Best Practices",
@@ -739,7 +807,8 @@ export const courseDetails = [
 						"Version Control with Git",
 						"Testing and Debugging",
 						"Deployment and Performance Optimization"
-					]
+					],
+					topicVideos: []
 				}
 			]
 		}
@@ -824,6 +893,8 @@ export const pricingPlanSection = {
 			title: "Free",
 			description: "Get your course started fast, free forever.",
 			pricing: "$0",
+			priceId: process.env.PRICE_ID_2,
+			productLink: process.env.PRICE_LINK_2,
 			bills: "for unlimited members",
 			ctaButton: "Get Started Free",
 			featuresTitle: "Free features:",
@@ -839,6 +910,8 @@ export const pricingPlanSection = {
 			title: "Professional+",
 			description: "For serious learners looking to advance their careers.",
 			pricing: "$79",
+			priceId: process.env.priceId1,
+			productLink: process.env.priceLink1,
 			bills: "per month",
 			ctaButton: "Buy Professional+",
 			featuresTitle: "All Professional+ features:",
