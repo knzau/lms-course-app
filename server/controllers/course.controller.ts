@@ -11,7 +11,6 @@ import mongoose from "mongoose";
 export const uploadCourse = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const data = req.body;
-		console.log({ data });
 
 		const thumbnail = data.thumbnail;
 		if (thumbnail) {
