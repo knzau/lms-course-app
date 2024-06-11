@@ -8,6 +8,7 @@
 # testing
 /coverage
 
+# Secret file
 .env
 
 # next.js
