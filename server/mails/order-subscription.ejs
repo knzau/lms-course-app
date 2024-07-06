@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Subscription Order</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				background-color: #f5f5f5;
+				margin: 0;
+				padding: 20px;
+			}
+
+			.container {
+				max-width: 600px;
+				margin: 0 auto;
+				color: #fff;
+				background-color: #fff;
+				padding: 20px;
+				border-radius: 5px;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+			.message {
+				margin-bottom: 20px;
+				padding-top: 50px;
+				text-align: center;
+				color: #fff;
+				font-size: 18px;
+			}
+
+			.course-info {
+				margin: auto;
+				padding: 20px 0px;
+				width: 100%;
+				background-color: #fff;
+				border-radius: 10px;
+				margin-bottom: 20px;
+				box-shadow: 2px 2px 2px 2px rgba(206, 197, 197, 0.1);
+			}
+
+			.course-info > h4 {
+				color: #23bd70;
+				font-size: 22px;
+				font-family: "Poppins", sans-serif;
+				font-weight: 500;
+				text-align: center;
+				padding: 0 !important;
+				margin-top: 0 !important;
+			}
+
+			.course-name {
+				font-size: 24px;
+				margin-bottom: 10px;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+
+			td {
+				padding: 10px;
+				text-align: center;
+				width: 28.33%;
+			}
+			td.col-2 {
+				width: 100%;
+				text-align: left;
+				padding: 0px;
+				margin: 0px;
+			}
+
+			.mauto {
+				width: 100%;
+				margin: auto;
+			}
+			.table-row {
+				width: 70%;
+				display: block;
+				margin: auto;
+				padding: 10px 0;
+			}
+			h1 {
+				color: #333;
+				text-align: center;
+			}
+
+			p {
+				margin-bottom: 10px;
+			}
+
+			.label {
+				font-weight: bold;
+			}
+
+			.value {
+				color: #555;
+			}
+
+			.footer {
+				margin-top: 20px;
+				text-align: center;
+				color: #888;
+				font-size: 12px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<h1>Your course order is confirmed</h1>
+			<p>We are just as excited as you are, <span class="value"><%= user.name %></span>!</p>
+			<div class="course-info">
+				<h4>Here's what you ordered":</h4>
+				<table style="width: 100%; border-bottom: 1px solid #ccc">
+					<tr>
+						<td>Order ID: <%= order.id %></td>
+						<td>Order Date: <%= order.date %></td>
+					</tr>
+				</table>
+				<table style="width: 100%; margin: auto; display: block">
+					<tr>
+						<td class="first-td">Item</td>
+						<td class="first-td">Qty</td>
+						<td class="first-td">Cost</td>
+					</tr>
+				</table>
+				<table style="width: 100%; margin: auto; display: block">
+					<tr>
+						<td class="first-td"><%= order.title %></td>
+						<td class="first-td">1</td>
+						<td class="first-td"><%= order.price %></td>
+					</tr>
+				</table>
+			</div>
+			<div class="footer">&copy; 2024 Skillbridge Learning. All rights reserved.</div>
+		</div>
+	</body>
+</html>

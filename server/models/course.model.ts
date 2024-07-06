@@ -22,7 +22,7 @@ interface ICourseDetails extends Document {
 	title: string;
 	description: string;
 	videoUrl: string;
-	videoThumbnaul: object;
+	videoThumbnail: object;
 	videoSection: string;
 	videoLength: string;
 	videoPlayer: string;
@@ -137,7 +137,7 @@ const courseSchema = new mongoose.Schema<ICourse>({
 		}
 	},
 	tags: {
-		type: String,
+		type: [String],
 		required: true
 	},
 	estimatedPrice: {
@@ -151,8 +151,8 @@ const courseSchema = new mongoose.Schema<ICourse>({
 		type: String,
 		required: true
 	},
-	benefits: [{ title: String }],
-	prerequisites: [{ title: String }],
+	benefits: [String],
+	prerequisites: [String],
 	demoUrl: {
 		type: String,
 		required: true
@@ -172,6 +172,10 @@ const courseSchema = new mongoose.Schema<ICourse>({
 	rating: {
 		type: Number,
 		default: 0
+	},
+	price: {
+		type: Number,
+		required: true
 	},
 	purchased: {
 		type: Number,

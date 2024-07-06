@@ -40,7 +40,7 @@ export const isAuthenticated = catchAsyncError(async (req: Request, res: Respons
 export const authorizeRoles = (...roles: string[]) => {
 	return (req: Request, res: Response, next: NextFunction) => {
 		if (!roles.includes(req.user?.role || "")) {
-			return next(new ErrorHandler("Role not authorized", 403));
+			return next(new ErrorHandler(`Role:  ${req.user?.role} not authorized`, 403));
 		}
 		next();
 	};

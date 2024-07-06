@@ -8,6 +8,7 @@ interface EmailOptions {
 	subject: string;
 	template: string;
 	data: { [key: string]: any };
+	name: string;
 }
 
 const sendMail = async (options: EmailOptions): Promise<void> => {
@@ -20,10 +21,10 @@ const sendMail = async (options: EmailOptions): Promise<void> => {
 			pass: process.env.SMTP_PASSWORD
 		}
 	});
-	const { email, subject, template, data } = options;
+	const { name, email, subject, template, data } = options;
 
 	//get the path to the email template file
-	const templatePath = path.join(__dirname, "../mails", template + ".ejs");
+	const templatePath = path.join(__dirname, "../mails", template);
 
 	//render the email template with EJS
 

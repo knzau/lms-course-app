@@ -32,13 +32,11 @@ export const editCourse = catchAsyncError(async (req: Request, res: Response, ne
 	try {
 		const data = req.body;
 		const thumbnail = data.thumbnail;
-		console.log({ thumbnail });
 
 		if (thumbnail) {
 			await cloudinary.v2.uploader.destroy(thumbnail.public_id);
 
 			const myCloud = await cloudinary.v2.uploader.upload(thumbnail.url, { folder: "courses" });
-			console.log("mycloud....", { myCloud });
 
 			data.thumbnail = {
 				public_id: myCloud.public_id,
@@ -95,11 +93,8 @@ export const getAllCourses = catchAsyncError(async (req: Request, res: Response,
 		const coursesExistingInCache = await redis.get("allCourses");
 
 		if (coursesExistingInCache) {
-			console.log("redddiss");
-
 			const courses = JSON.parse(coursesExistingInCache);
 			res.status(200).json({ success: true, courses });
-			console.log("rediss!!");
 		} else {
 			const courses = await CourseModel.find().select(
 				"-couseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links"

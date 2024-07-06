@@ -16,7 +16,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, classProps, view = GRID
 
 	return (
 		<div
-			key={course.id}
+			key={course.course_id}
 			className={cn(
 				"flex gap-10 p-4 border-[1px] rounded-md md:flex-row drop-shadow-sm",
 				{
@@ -25,7 +25,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, classProps, view = GRID
 				},
 				classProps
 			)}
-			onClick={() => navigateToCourse(course.id)}
+			onClick={() => navigateToCourse(course.course_id)}
 		>
 			<Image
 				loader={myLoader}

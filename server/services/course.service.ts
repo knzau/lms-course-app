@@ -12,8 +12,6 @@ export const createCourse = catchAsyncError(async (data: any, res: Response, nex
 			course
 		});
 	} catch (error: any) {
-		console.log({ error });
-
 		next(new ErrorHandler(error.message, 400));
 	}
 });

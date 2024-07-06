@@ -50,7 +50,13 @@ export const registrationUser = catchAsyncError(async (req: Request, res: Respon
 		const html = await ejs.renderFile(path.join(__dirname, "../mails/activation-mail.ejs"), data);
 
 		try {
-			await sendMail({ email: user.email, subject: "Account activation", template: "activation-mail", data });
+			await sendMail({
+				name: user.name,
+				email: user.email,
+				subject: "Account activation",
+				template: "activation-mail",
+				data
+			});
 			res.status(201).json({
 				success: true,
 				message: `Account created successfully. Please check your email ${user.email} to activate your account`,
@@ -107,7 +113,7 @@ export const loginUser = catchAsyncError(async (req: Request, res: Response, nex
 		if (!email || !password) {
 			return next(new ErrorHandler("Please enter email and password", 400));
 		}
-		const user = await userModel.findOne({ email }).select("password");
+		const user = await userModel.findOne({ email }).select("+password");
 
 		if (!user) {
 			return next(new ErrorHandler("Invalid email or password", 401));

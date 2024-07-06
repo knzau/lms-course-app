@@ -6,6 +6,7 @@ import { errorMiddleware } from "./middleware/errorMiddleware";
 import userRouter from "./routes/user.routes";
 import { v2 as cloudinary } from "cloudinary";
 import courseRouter from "./routes/course.routes";
+import orderRouter from "./routes/order.routes";
 
 cloudinary.config({
 	cloud_name: process.env.CLOUD_NAME,
@@ -21,6 +22,7 @@ app.use(cors({ origin: process.env.ORIGIN }));
 
 app.use("/api/v1", userRouter);
 app.use("/api/v1", courseRouter);
+app.use("/api/v1", orderRouter);
 
 app.get("/test", (req: Request, res: Response, next: NextFunction) => {
 	res.status(200).json({ success: true, message: "Test endpoint" });
