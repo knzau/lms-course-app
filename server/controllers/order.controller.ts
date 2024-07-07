@@ -60,11 +60,19 @@ export const createOrder = catchAsyncError(async (req: Request, res: Response, n
 
 		await user?.save();
 
-		const notification = await NotificationModel.create({
+		await NotificationModel.create({
 			title: "New Order",
 			message: `New order placed for ${course.title}`,
 			userId: user?._id
 		});
+		if (!course.purchased) {
+			course.purchased = 1;
+		} else {
+			course.purchased += 1;
+		}
+
+		await course?.save();
+
 		newOrder(data, res, next);
 	} catch (error: any) {
 		return next(new ErrorHandler(error.message, 400));

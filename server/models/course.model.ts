@@ -1,15 +1,16 @@
 import mongoose, { Document, Model, Schema } from "mongoose";
 import { courseDetails } from "../../client/src/utils/constants";
+import { IUser } from "./user.model";
 
 interface ILink extends Document {
 	title: string;
 	url: string;
 }
 
-interface IComment extends Document {
-	user: object;
-	comment: string;
-	commentReplies?: IComment[];
+export interface IComment extends Document {
+	user: IUser;
+	question: string;
+	questionReplies?: IComment[];
 }
 
 interface IReview extends Document {
@@ -65,7 +66,7 @@ interface ICourse extends Document {
 	purchased: number;
 	reviews: IReview[];
 	curriculum: ICurriculum;
-	courseData: ICourseDetails;
+	courseData: ICourseDetails[];
 }
 
 const linkSchema = new mongoose.Schema<ILink>({
@@ -75,7 +76,8 @@ const linkSchema = new mongoose.Schema<ILink>({
 
 const commentSchema = new mongoose.Schema<IComment>({
 	user: Object,
-	comment: String
+	question: String,
+	questionReplies: [Object]
 });
 const curriculumChapterSchema = new mongoose.Schema<ICurriculumChapter>({
 	name: String,

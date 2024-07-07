@@ -4,9 +4,11 @@ import { NextFunction, Request, Response } from "express";
 import ErrorHandler from "../utils/ErrorHandler";
 import { createCourse } from "../services/course.service";
 import { redis } from "../utils/redis";
-import CourseModel from "../models/course.model";
+import CourseModel, { IComment } from "../models/course.model";
 import { Course } from "../../client/src/utils/constants";
 import mongoose from "mongoose";
+import NotificationModel from "../models/notification.model";
+import { IUser } from "../models/user.model";
 
 export const uploadCourse = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
 	try {
@@ -136,7 +138,6 @@ interface IAddQuestionData {
 	contentId: string;
 }
 
-//Todo : add question controller
 export const addQuestion = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const { question, courseId, contentId }: IAddQuestionData = req.body;
@@ -145,7 +146,30 @@ export const addQuestion = catchAsyncError(async (req: Request, res: Response, n
 		if (!mongoose.Types.ObjectId.isValid(contentId)) {
 			return next(new ErrorHandler("Invalid content id", 400));
 		}
-		// const courseContent = course?.courseData.find((item: any) => item._id.equals(contentId));
+		const courseContent = course?.courseData?.find((item: any) => item._id.equals(contentId));
+
+		if (!courseContent) {
+			return next(new ErrorHandler("Content not found", 404));
+		}
+		const newQuestion: any = {
+			user: req.user,
+			question,
+			questionReplies: []
+		};
+
+		courseContent.questions.push(newQuestion);
+
+		await NotificationModel.create({
+			user: req.user?._id,
+			title: "New Question Added",
+			message: `New question added in ${course?.title}`
+		});
+
+		await course?.save();
+		res.status(201).json({
+			success: true,
+			course
+		});
 	} catch (error: any) {
 		return next(new ErrorHandler(error.message, 500));
 	}
