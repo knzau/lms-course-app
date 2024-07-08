@@ -5,10 +5,11 @@ import ErrorHandler from "../utils/ErrorHandler";
 import { createCourse } from "../services/course.service";
 import { redis } from "../utils/redis";
 import CourseModel, { IComment } from "../models/course.model";
-import { Course } from "../../client/src/utils/constants";
 import mongoose from "mongoose";
 import NotificationModel from "../models/notification.model";
-import { IUser } from "../models/user.model";
+import ejs from "ejs";
+import path from "path";
+import sendMail from "../utils/sendMail";
 
 export const uploadCourse = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
 	try {
@@ -175,4 +176,73 @@ export const addQuestion = catchAsyncError(async (req: Request, res: Response, n
 	}
 });
 
-//Todo : add review controller
+interface IAddReviewData {
+	answer: string;
+	courseId: string;
+	contentId: string;
+	questionId: string;
+}
+
+export const addAnswer = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const { answer, courseId, contentId, questionId }: IAddReviewData = req.body;
+		const course = await CourseModel.findById(courseId);
+		if (!mongoose.Types.ObjectId.isValid(contentId)) {
+			return next(new ErrorHandler("Invalid content id", 400));
+		}
+		const courseContent = course?.courseData?.find((item: any) => item._id.equals(contentId));
+
+		const question = courseContent?.questions?.find((item: any) => item._id.equals(questionId));
+
+		if (!question) {
+			return next(new ErrorHandler("Question not found", 404));
+		}
+		const newAnswer: any = {
+			user: req.user,
+			answer
+		};
+		console.log({ question });
+
+		await question?.questionReplies?.push(newAnswer);
+
+		await NotificationModel.create({
+			user: req.user?._id,
+			title: "New Answer Added",
+			message: `New answer added in ${course?.title}`
+		});
+
+		await course?.save();
+		if (req.user?._id === question.user._id) {
+			//create notification for user who asked the question
+			await NotificationModel.create({
+				userId: question.user._id,
+				title: "New Answer Added",
+				message: `New answer added in ${course?.title}`
+			});
+		} else {
+			const data = {
+				name: question.user.name,
+				title: courseContent?.title
+			};
+
+			const html = await ejs.renderFile(path.join(__dirname, "../mails/question-reply.ejs"), data);
+
+			try {
+				await sendMail({
+					email: question.user.email,
+					subject: "Question Reply",
+					template: "question-reply.ejs",
+					data
+				});
+			} catch (error: any) {
+				return next(new ErrorHandler(error.message, 500));
+			}
+		}
+		res.status(201).json({
+			success: true,
+			course
+		});
+	} catch (error: any) {
+		return next(new ErrorHandler(error.message, 500));
+	}
+});

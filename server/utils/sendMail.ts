@@ -8,7 +8,7 @@ interface EmailOptions {
 	subject: string;
 	template: string;
 	data: { [key: string]: any };
-	name: string;
+	name?: string;
 }
 
 const sendMail = async (options: EmailOptions): Promise<void> => {
