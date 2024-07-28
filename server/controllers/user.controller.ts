@@ -9,7 +9,7 @@ import ejs from "ejs";
 import sendMail from "../utils/sendMail";
 import { accessTokenOptions, refreshTokenOptions, sendToken } from "../utils/jwt";
 
-import { getUserById } from "../services/user.service";
+import { deleteUserService, getAllUsersFromDB, getUserById, updateUserRoleService } from "../services/user.service";
 import cloudinary from "cloudinary";
 
 // register user
@@ -300,5 +300,35 @@ export const updateProfilePicture = catchAsyncError(async (req: Request, res: Re
 		res.status(200).json({ success: true, user });
 	} catch (error: any) {
 		next(new ErrorHandler(error.message, 400));
+	}
+});
+
+//get all users -- only for admin
+export const getAllUsers = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		getAllUsersFromDB(res);
+	} catch (error: any) {
+		return next(new ErrorHandler(error.message, 500));
+	}
+});
+
+// update user role -- only for admin
+export const updateUserRole = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const { id, role } = req.body;
+		updateUserRoleService(id, role, res, next);
+	} catch (error: any) {
+		return next(new ErrorHandler(error.message, 400));
+	}
+});
+
+// delete user -- only for admin
+export const deleteUserById = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const { id } = req.params;
+		deleteUserService(id, res, next);
+		await redis.del(id);
+	} catch (error: any) {
+		return next(new ErrorHandler(error.message, 400));
 	}
 });

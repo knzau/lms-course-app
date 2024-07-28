@@ -2,7 +2,7 @@ import cloudinary from "cloudinary";
 import { catchAsyncError } from "../middleware/catchAsyncErrors";
 import { NextFunction, Request, Response } from "express";
 import ErrorHandler from "../utils/ErrorHandler";
-import { createCourse } from "../services/course.service";
+import { createCourse, getAllCoursesFromDB, deleteCourseService } from "../services/course.service";
 import { redis } from "../utils/redis";
 import CourseModel, { IComment } from "../models/course.model";
 import mongoose from "mongoose";
@@ -244,5 +244,25 @@ export const addAnswer = catchAsyncError(async (req: Request, res: Response, nex
 		});
 	} catch (error: any) {
 		return next(new ErrorHandler(error.message, 500));
+	}
+});
+
+//get all courses -- only for admin
+export const getAllCoursesAdmin = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		getAllCoursesFromDB(res);
+	} catch (error: any) {
+		return next(new ErrorHandler(error.message, 500));
+	}
+});
+
+// delete course by id -- only for admin
+
+export const deleteCourse = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const { id } = req.params;
+		deleteCourseService(id, res, next);
+	} catch (error: any) {
+		return next(new ErrorHandler(error.message, 400));
 	}
 });

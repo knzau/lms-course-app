@@ -2,8 +2,10 @@ import express from "express";
 import {
 	addAnswer,
 	addQuestion,
+	deleteCourse,
 	editCourse,
 	getAllCourses,
+	getAllCoursesAdmin,
 	getCourseByUser,
 	getSingleCourse,
 	uploadCourse
@@ -19,10 +21,13 @@ courseRouter.get("/get-course/:id", isAuthenticated, getSingleCourse);
 
 courseRouter.get("/get-courses", isAuthenticated, getAllCourses);
 
+courseRouter.get("/get-all-courses", isAuthenticated, authorizeRoles("admin"), getAllCoursesAdmin);
+
 courseRouter.get("/get-course-content/:id", isAuthenticated, getCourseByUser);
 
 courseRouter.put("/add-question", isAuthenticated, addQuestion);
 
 courseRouter.put("/add-answer", isAuthenticated, addAnswer);
+courseRouter.delete("/delete-course/:id", isAuthenticated, authorizeRoles("admin"), deleteCourse);
 
 export default courseRouter;

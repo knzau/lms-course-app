@@ -4,7 +4,7 @@ import { IOrder } from "../models/order.model";
 import userModel from "../models/user.model";
 import ErrorHandler from "../utils/ErrorHandler";
 import CourseModel from "../models/course.model";
-import { newOrder } from "../services/order.service";
+import { getAllOrdersFromDB, newOrder } from "../services/order.service";
 import ejs from "ejs";
 import path from "path";
 import sendMail from "../utils/sendMail";
@@ -76,5 +76,14 @@ export const createOrder = catchAsyncError(async (req: Request, res: Response, n
 		newOrder(data, res, next);
 	} catch (error: any) {
 		return next(new ErrorHandler(error.message, 400));
+	}
+});
+
+// get all orders for --admin only
+export const getAllOrders = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		getAllOrdersFromDB(res);
+	} catch (error: any) {
+		return next(new ErrorHandler(error.message, 500));
 	}
 });

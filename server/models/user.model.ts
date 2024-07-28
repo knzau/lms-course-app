@@ -24,6 +24,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
 	{
 		name: {
 			type: String,
+			minlength: [6, "Password must be at least 6 characters"],
 			required: [true, "Please enter your name"]
 		},
 		email: {

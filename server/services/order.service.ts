@@ -11,3 +11,11 @@ export const newOrder = catchAsyncError(async (data: any, res: Response, next: N
 		order: order
 	});
 });
+
+export const getAllOrdersFromDB = async (res: Response) => {
+	const orders = await orderModel.find().sort({ createdAt: -1 });
+	res.status(201).json({
+		success: true,
+		orders
+	});
+};
